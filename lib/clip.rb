@@ -26,10 +26,6 @@ def file_contents(text, vndump)
   vndump.close
 end
 
-def check_clipboard(text)
-  text == Clipboard.paste ? false : true
-end
-
 def run_loop(text='',first_run=true)
   if first_run
     puts "Now watching the clipboard for changes. Press Ctrl+C to stop the program."
