@@ -19,24 +19,24 @@ def file_contents(text, vndump)
   vndump.puts "  <head>"
   vndump.puts "    <title>VN clipboard dump</title>"
   vndump.puts "  </head>"
-  vndump.puts "  <body>"
-  vndump.puts "    <span>#{text}</span>"
+  vndump.puts "  <body bgcolor='black'>"
+  vndump.puts "    <span><font color='white' size='24px'>#{text}</font></span>"
   vndump.puts "  </body>"
   vndump.puts "</html>"
   vndump.close
 end
 
-def run_loop(text='',first_run=true)
-  if first_run
-    puts "Now watching the clipboard for changes. Press Ctrl+C to stop the program."
-  end
-  
+def main()
+
+  flag = true
+
+  while flag
+    
   current_clip_text = copy_clipboard_contents
   create_html(current_clip_text) if text != current_clip_text
     
-  sleep 1
+  sleep 0.5
   
-  run_loop(current_clip_text,false)
   at_exit { delete_file } #This doesn't work. Signal handler needed
 end
 
