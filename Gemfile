@@ -1,3 +1,3 @@
 source 'http://rubygems.org'
 
-gem 'clipboard'
+gem 'win32-clipboard'

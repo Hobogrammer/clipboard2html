@@ -1,4 +1,5 @@
-require 'clipboard'
+require 'win32/clipboard'
+include Win32
 
 def create_html(text)
   vndump = File.new('vndump.html','w+')
@@ -31,7 +32,7 @@ def main()
   prev_text = ''
   puts "Now monitoring the clipboard for changes. Press Ctrl+C to close the program."
   while flag #placeholder until I get some signal handling in
-    current_clip_text = Clipboard.paste
+    current_clip_text = Clipboard.data(CLIPBOARD::UNICODETEXT)
     create_html(current_clip_text) if prev_text != current_clip_text
     prev_text = current_clip_text
     sleep 0.5 
