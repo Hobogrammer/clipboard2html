@@ -6,7 +6,7 @@ def create_html(current_text)
   file_contents(current_text, vndump)
 end
 
-def delete_file #to be called on SIGINT
+def delete_file
   File.delete('vndump.html') if File.exist?('vndump.html')
 end
 
@@ -32,7 +32,7 @@ def main()
   prev_text = ''
   puts "Now monitoring the clipboard for changes. Press Ctrl+C to close the program."
   
-  while flag #placeholder until I get some signal handling in
+  while flag
     current_text = Clipboard.data(Clipboard::UNICODETEXT)
     current_text = current_text.split("\u{000}")[0]
     if prev_text != current_text
@@ -43,4 +43,8 @@ def main()
   end 
 end
 
+Signal.trap("INT"){
+  delete_file
+  exit
+}
 main
