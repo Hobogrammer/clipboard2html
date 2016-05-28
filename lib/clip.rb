@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 require 'win32/clipboard'
 include Win32
 
@@ -33,8 +35,12 @@ def main()
   puts "Now monitoring the clipboard for changes. Press Ctrl+C to close the program."
   
   while flag
-    current_text = Clipboard.data(Clipboard::UNICODETEXT)
-    current_text = current_text.split("\u{000}")[0]
+    begin
+      current_text = Clipboard.data(Clipboard::UNICODETEXT)
+      current_text = current_text.split("\u{000}")[0]
+    rescue
+      puts "Clipboard gem has failed to sucessfully retrieve text from the clipboard. Skipping"
+    end
     if prev_text != current_text
       create_html(current_text)
       prev_text = current_text
