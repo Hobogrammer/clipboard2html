@@ -15,6 +15,7 @@ end
 def file_contents(current_text, vndump)
   vndump.puts "<html>"
   vndump.puts "  <head>"
+  vndump.puts "  <script type='text/javascript' src='http://livejs.com/live.js'></script>"
   vndump.puts "    <title>VN clipboard dump</title>"
   vndump.puts "  </head>"
   vndump.puts "  <body bgcolor='black'>"
